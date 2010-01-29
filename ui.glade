@@ -1,0 +1,170 @@
+<?xml version="1.0"?>
+<interface>
+  <requires lib="gtk+" version="2.16"/>
+  <!-- interface-naming-policy project-wide -->
+  <object class="GtkWindow" id="mainwin">
+    <property name="title" translatable="yes">FontMonk</property>
+    <child>
+      <object class="GtkVBox" id="vbox">
+        <property name="visible">True</property>
+        <property name="orientation">vertical</property>
+        <child>
+          <object class="GtkTreeView" id="mainview">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="headers_visible">False</property>
+            <property name="reorderable">True</property>
+            <property name="rules_hint">True</property>
+            <property name="enable_search">False</property>
+          </object>
+          <packing>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkToolbar" id="toolbar">
+            <property name="visible">True</property>
+            <property name="toolbar_style">both-horiz</property>
+            <property name="show_arrow">False</property>
+            <property name="icon_size">1</property>
+            <child>
+              <object class="GtkToolButton" id="add_button">
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">Add</property>
+                <property name="use_underline">True</property>
+                <property name="stock_id">gtk-add</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkToolButton" id="del_button">
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">Remove</property>
+                <property name="use_underline">True</property>
+                <property name="stock_id">gtk-remove</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkToolItem" id="tool_spacer">
+                <property name="visible">True</property>
+                <child>
+                  <object class="GtkComboBox" id="choosebox">
+                    <property name="visible">True</property>
+                  </object>
+                </child>
+              </object>
+              <packing>
+                <property name="expand">True</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkToolButton" id="exec_button">
+                <property name="visible">True</property>
+                <property name="is_important">True</property>
+                <property name="label" translatable="yes">Convert</property>
+                <property name="use_underline">True</property>
+                <property name="stock_id">gtk-convert</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  </object>
+  <object class="GtkWindow" id="progresswin">
+    <property name="border_width">15</property>
+    <child>
+      <object class="GtkVBox" id="mainvbox">
+        <property name="visible">True</property>
+        <property name="orientation">vertical</property>
+        <child>
+          <object class="GtkLabel" id="prog_header">
+            <property name="visible">True</property>
+            <property name="xalign">0</property>
+            <property name="yalign">0</property>
+            <property name="label" translatable="yes">&lt;b&gt;&lt;big&gt;Converting &lt;span&gt;COUNT&lt;/span&gt; files...&lt;/big&gt;&lt;/b&gt;</property>
+            <property name="use_markup">True</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="prog_subhead">
+            <property name="visible">True</property>
+            <property name="xalign">0</property>
+            <property name="yalign">0</property>
+            <property name="ypad">10</property>
+            <property name="label" translatable="yes">FontMonk is now converting your fonts into &lt;span&gt;FORMAT&lt;/span&gt;.</property>
+            <property name="use_markup">True</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="prog_line">
+            <property name="visible">True</property>
+            <property name="xalign">0</property>
+            <property name="yalign">0</property>
+            <property name="label" translatable="yes">Converting &lt;span&gt;FILE&lt;/span&gt;...</property>
+            <property name="use_markup">True</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="position">2</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkProgressBar" id="progress">
+            <property name="visible">True</property>
+            <property name="activity_mode">True</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="padding">15</property>
+            <property name="position">3</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkHButtonBox" id="buttonbox">
+            <property name="visible">True</property>
+            <property name="layout_style">start</property>
+            <child>
+              <object class="GtkButton" id="cancelbutton">
+                <property name="label">gtk-cancel</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="use_stock">True</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="position">4</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  </object>
+</interface>
