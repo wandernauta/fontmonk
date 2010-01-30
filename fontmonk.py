@@ -65,8 +65,14 @@ class FontMonk:
         self.ch.add_attribute(self.cell, 'text', 0)
         fx = self.font_exts.items()
         fx.sort()
+        # TODO: Could be prettier.
+        i = 0
         for k, v in fx:
-            model.append([("Output %s (%s)" % (v, k)), k]) 
+            model.append([("Output %s (%s)" % (v, k)), k])
+            if (k == 'ttf'):
+                j = i
+            i += 1
+        self.ch.set_active(j)
         
     # Callback handlers 
     
