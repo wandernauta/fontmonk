@@ -50,6 +50,8 @@ class FontMonk:
                                                     ('STRING', 0, 3),
                                              ],
                                              gtk.gdk.ACTION_DEFAULT)
+        
+        self.treeview.get_selection().set_mode(gtk.SELECTION_MULTIPLE)
 
         self.treeview.connect("drag_data_received", self.drag_data_received_data)
         
