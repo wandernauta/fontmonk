@@ -80,6 +80,15 @@ class FontMonk:
         iters = [model.get_iter(path) for path in selected]
         for iter in iters:
             model.remove(iter)
+            
+    def add_button_clicked_cb(self, widget):
+        pass
+    
+    def exec_button_clicked_cb(self, widget):
+        pass
+    
+    def cancelbutton_clicked_cb(self, widget):
+        pass
         
     def drag_data_received_data(self, treeview, context, x, y, selection,
                                 info, etime):
