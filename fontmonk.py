@@ -1,4 +1,4 @@
-import gtk, pygtk, gobject, urllib, threading, tempfile, os, subprocess
+import gtk, pygtk, gobject, urllib, os, subprocess, re
 gobject.threads_init()
 
 class FontMonk:
@@ -82,15 +82,19 @@ class FontMonk:
     def makescript(self):
         # Thanks to Thomas Maier for the 'quick and dirty hack'
         model = self.treeview.get_model()
+        self.count = len(model)
+        self.t = self.ch.get_model().get_value(self.ch.get_active_iter(), 1)
         iter = model.get_iter_root()
         s = ""
         while iter:
             v = model.get_value(iter, 2)
-            s += 'Print("Opening %s");Open("%s");Print("Saving %s.otf");Generate("%s.otf");' % (v, v, v, v) 
+            s += 'Print("Opening %s");Open("%s");Print("Saving %s.%s");Generate("%s.%s");' % (v, v, v, self.t, v, self.t) 
             iter = model.iter_next(iter)
         self.runscript(s)        
         
     def runscript(self, s):
+        self.ph.set_markup('<b><big>Converting <span>%s</span> files...</big></b>' % self.count)
+        self.ps.set_markup('FontMonk is now converting your fonts into <span>%s</span>.' % self.t.upper())
         p = subprocess.Popen('fontforge -lang=ff -c \'%s\' &' % s, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         stdout_id = gobject.io_add_watch(p.stdout, gobject.IO_IN, self.gotline)
         hup_id = gobject.io_add_watch(p.stdout, gobject.IO_HUP, self.hup)
@@ -106,7 +110,7 @@ class FontMonk:
     
     def hup(self, file, dunno):
         self.pl.hide()
-        self.ps.set_text("FontMonk has finished converting your fonts.")
+        self.ps.set_text("Conversion finished.")
         self.pb.set_fraction(1)
         return False
         

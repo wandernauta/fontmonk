@@ -94,6 +94,9 @@
   </object>
   <object class="GtkWindow" id="progresswin">
     <property name="border_width">15</property>
+    <property name="title" translatable="yes">Converting</property>
+    <property name="resizable">False</property>
+    <property name="destroy_with_parent">True</property>
     <child>
       <object class="GtkVBox" id="mainvbox">
         <property name="visible">True</property>
@@ -130,7 +133,6 @@
             <property name="visible">True</property>
             <property name="xalign">0</property>
             <property name="yalign">0</property>
-            <property name="label" translatable="yes">Converting &lt;span&gt;FILE&lt;/span&gt;...</property>
             <property name="use_markup">True</property>
           </object>
           <packing>
