@@ -4,11 +4,15 @@
   <!-- interface-naming-policy project-wide -->
   <object class="GtkWindow" id="mainwin">
     <property name="title" translatable="yes">FontMonk</property>
+    <property name="icon_name">font-x-generic</property>
     <signal name="destroy" handler="quit"/>
     <child>
       <object class="GtkVBox" id="vbox">
         <property name="visible">True</property>
         <property name="orientation">vertical</property>
+        <child>
+          <placeholder/>
+        </child>
         <child>
           <object class="GtkTreeView" id="mainview">
             <property name="width_request">300</property>
@@ -21,7 +25,7 @@
             <property name="enable_search">False</property>
           </object>
           <packing>
-            <property name="position">0</property>
+            <property name="position">1</property>
           </packing>
         </child>
         <child>
@@ -50,6 +54,50 @@
                 <property name="use_underline">True</property>
                 <property name="stock_id">gtk-remove</property>
                 <signal name="clicked" handler="del_button_clicked_cb"/>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="homogeneous">True</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkSeparatorToolItem" id="toolsep2">
+                <property name="visible">True</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="homogeneous">True</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkToolButton" id="clear_button">
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">Clear</property>
+                <property name="use_underline">True</property>
+                <property name="stock_id">gtk-clear</property>
+                <signal name="clicked" handler="clear_button_clicked_cb"/>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="homogeneous">True</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkToolButton" id="about_button">
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">About</property>
+                <property name="use_underline">True</property>
+                <property name="stock_id">gtk-about</property>
+                <signal name="clicked" handler="about_button_clicked_cb"/>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="homogeneous">True</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkSeparatorToolItem" id="toolsep1">
+                <property name="visible">True</property>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -86,7 +134,7 @@
           </object>
           <packing>
             <property name="expand">False</property>
-            <property name="position">1</property>
+            <property name="position">2</property>
           </packing>
         </child>
       </object>
@@ -174,6 +222,43 @@
           <packing>
             <property name="expand">False</property>
             <property name="position">4</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  </object>
+  <object class="GtkAboutDialog" id="adiag">
+    <property name="border_width">5</property>
+    <property name="icon_name">emblem-favorite</property>
+    <property name="type_hint">normal</property>
+    <property name="skip_taskbar_hint">True</property>
+    <property name="has_separator">False</property>
+    <property name="program_name">FontMonk</property>
+    <property name="version">0.1</property>
+    <property name="copyright" translatable="yes">Copyright (c) Wander Nauta 2010</property>
+    <property name="comments" translatable="yes">Batch convert fonts with ease.</property>
+    <property name="website">http://github.com/wandernauta/fontmonk</property>
+    <property name="website_label" translatable="yes">FontMonk on GitHub</property>
+    <property name="logo_icon_name">font</property>
+    <signal name="response" handler="adiag_hide"/>
+    <signal name="close" handler="adiag_hide"/>
+    <child internal-child="vbox">
+      <object class="GtkVBox" id="dialog-vbox1">
+        <property name="visible">True</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">2</property>
+        <child>
+          <placeholder/>
+        </child>
+        <child internal-child="action_area">
+          <object class="GtkHButtonBox" id="dialog-action_area1">
+            <property name="visible">True</property>
+            <property name="layout_style">end</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="pack_type">end</property>
+            <property name="position">0</property>
           </packing>
         </child>
       </object>

@@ -144,6 +144,15 @@ class FontMonk:
     def closebutton_clicked_cb(self, widget):
         self.pw.hide()
         self.w.show()
+        
+    def clear_button_clicked_cb(self, widget):
+        self.treeview.get_model().clear()
+        
+    def about_button_clicked_cb(self, widget):
+        self.b.get_object('adiag').show()
+        
+    def adiag_hide(self, widget, dunno):
+        self.b.get_object('adiag').hide()
     
     def addpath(self, path):
         model = self.treeview.get_model()
