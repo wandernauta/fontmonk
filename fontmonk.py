@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 import gtk, pygtk, gobject, urllib, os, subprocess, re
 gobject.threads_init()
 

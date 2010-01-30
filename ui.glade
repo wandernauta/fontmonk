@@ -37,6 +37,8 @@
             <child>
               <object class="GtkToolButton" id="add_button">
                 <property name="visible">True</property>
+                <property name="has_tooltip">True</property>
+                <property name="tooltip_text" translatable="yes">Add</property>
                 <property name="label" translatable="yes">Add</property>
                 <property name="use_underline">True</property>
                 <property name="stock_id">gtk-add</property>
@@ -50,6 +52,8 @@
             <child>
               <object class="GtkToolButton" id="del_button">
                 <property name="visible">True</property>
+                <property name="has_tooltip">True</property>
+                <property name="tooltip_text" translatable="yes">Remove selected</property>
                 <property name="label" translatable="yes">Remove</property>
                 <property name="use_underline">True</property>
                 <property name="stock_id">gtk-remove</property>
@@ -72,6 +76,8 @@
             <child>
               <object class="GtkToolButton" id="clear_button">
                 <property name="visible">True</property>
+                <property name="has_tooltip">True</property>
+                <property name="tooltip_text" translatable="yes">Clear</property>
                 <property name="label" translatable="yes">Clear</property>
                 <property name="use_underline">True</property>
                 <property name="stock_id">gtk-clear</property>
@@ -85,6 +91,8 @@
             <child>
               <object class="GtkToolButton" id="about_button">
                 <property name="visible">True</property>
+                <property name="has_tooltip">True</property>
+                <property name="tooltip_text" translatable="yes">About FontMonk</property>
                 <property name="label" translatable="yes">About</property>
                 <property name="use_underline">True</property>
                 <property name="stock_id">gtk-about</property>
