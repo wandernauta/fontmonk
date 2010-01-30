@@ -1,5 +1,4 @@
-import gtk, pygtk, gobject, urllib
-import os
+import gtk, pygtk, gobject, urllib, threading, tempfile, os, commands
 
 class FontMonk:
     # This list is taken from the FontForge man page.
@@ -74,6 +73,18 @@ class FontMonk:
             i += 1
         self.ch.set_active(j)
         
+    def makescript(self):
+        # Thanks to Thomas Maier for the 'quick and dirty hack'
+        model = self.treeview.get_model()
+        iter = model.get_iter_root()
+        s = ""
+        while iter:
+            v = model.get_value(iter, 2)
+            s += 'Print("Opening %s");Open("%s");Print("Saving %s.ttf");Generate("%s.ttf");' % (v, v, v, v) 
+            iter = model.iter_next(iter)
+        print s
+        os.system('fontforge -lang=ff -c \'%s\'' % s)
+        
     # Callback handlers 
     
     def quit(self, widget):
@@ -96,10 +107,14 @@ class FontMonk:
         diag.destroy()
     
     def exec_button_clicked_cb(self, widget):
-        pass
+        self.pw = self.b.get_object('progresswin')
+        self.w.hide()
+        self.pw.show_all()
+        self.makescript()
     
     def cancelbutton_clicked_cb(self, widget):
-        pass
+        self.pw.hide()
+        self.w.show()
     
     def addpath(self, path):
         model = self.treeview.get_model()
