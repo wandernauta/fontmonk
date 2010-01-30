@@ -36,6 +36,7 @@
                 <property name="label" translatable="yes">Add</property>
                 <property name="use_underline">True</property>
                 <property name="stock_id">gtk-add</property>
+                <signal name="clicked" handler="add_button_clicked_cb"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -48,6 +49,7 @@
                 <property name="label" translatable="yes">Remove</property>
                 <property name="use_underline">True</property>
                 <property name="stock_id">gtk-remove</property>
+                <signal name="clicked" handler="del_button_clicked_cb"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -74,6 +76,7 @@
                 <property name="label" translatable="yes">Convert</property>
                 <property name="use_underline">True</property>
                 <property name="stock_id">gtk-convert</property>
+                <signal name="clicked" handler="exec_button_clicked_cb"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -157,6 +160,7 @@
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_stock">True</property>
+                <signal name="clicked" handler="cancelbutton_clicked_cb"/>
               </object>
               <packing>
                 <property name="expand">False</property>
