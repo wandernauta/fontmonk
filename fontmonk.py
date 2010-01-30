@@ -88,13 +88,34 @@ class FontMonk:
             model.remove(iter)
             
     def add_button_clicked_cb(self, widget):
-        pass
+        diag = gtk.FileChooserDialog('Add a font file', None, gtk.FILE_CHOOSER_ACTION_OPEN,(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL, gtk.STOCK_OPEN, gtk.RESPONSE_OK))
+        diag.set_default_response(gtk.RESPONSE_OK)        
+        response = diag.run()
+        if response == gtk.RESPONSE_OK:
+            self.addpath(diag.get_filename())
+        diag.destroy()
     
     def exec_button_clicked_cb(self, widget):
         pass
     
     def cancelbutton_clicked_cb(self, widget):
         pass
+    
+    def addpath(self, path):
+        model = self.treeview.get_model()
+        fname = path.split(os.sep)[-1]
+        fext = fname.split('.')[-1]        
+        if not os.path.isfile(path):
+            print data, "couldn't be turned into a path."
+            return
+        
+        if not str(fext).lower() in self.font_exts:
+            print fname, "didn't match a font extension."
+            return
+        
+        label =  "%s <span color='gray'>%s</span>" % (path.split(os.sep)[-1], self.font_exts[str(fext).lower()])
+        model.append([gtk.STOCK_FILE, label, path])
+
         
     def drag_data_received_data(self, treeview, context, x, y, selection,
                                 info, etime):
@@ -103,20 +124,7 @@ class FontMonk:
         files = data.splitlines()
         for file in files:
             path = str(urllib.unquote(file)).replace('file://', '')
-            fname = path.split(os.sep)[-1]
-            fext = fname.split('.')[-1]
-            if not os.path.isfile(path):
-                print data, "couldn't be turned into a path."
-                context.finish(True, True, etime)
-                continue
-            
-            if not str(fext).lower() in self.font_exts:
-                print fname, "didn't match a font extension."
-                context.finish(True, True, etime)
-                continue
-        
-            label =  "%s <span color='gray'>%s</span>" % (path.split(os.sep)[-1], self.font_exts[str(fext).lower()])
-            model.append([gtk.STOCK_FILE, label, path])
+            self.addpath(path)
         return
     
 def main():
