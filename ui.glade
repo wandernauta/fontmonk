@@ -152,15 +152,15 @@
         <child>
           <object class="GtkHButtonBox" id="buttonbox">
             <property name="visible">True</property>
-            <property name="layout_style">start</property>
+            <property name="layout_style">end</property>
             <child>
-              <object class="GtkButton" id="cancelbutton">
-                <property name="label">gtk-cancel</property>
+              <object class="GtkButton" id="closebutton">
+                <property name="label">gtk-close</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_stock">True</property>
-                <signal name="clicked" handler="cancelbutton_clicked_cb"/>
+                <signal name="clicked" handler="closebutton_clicked_cb"/>
               </object>
               <packing>
                 <property name="expand">False</property>

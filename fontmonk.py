@@ -1,4 +1,5 @@
-import gtk, pygtk, gobject, urllib, threading, tempfile, os, commands
+import gtk, pygtk, gobject, urllib, threading, tempfile, os, subprocess
+gobject.threads_init()
 
 class FontMonk:
     # This list is taken from the FontForge man page.
@@ -23,6 +24,11 @@ class FontMonk:
         self.b = gtk.Builder()
         self.b.add_from_file('ui.glade')
         self.w = self.g('mainwin')
+        
+        self.ph = self.g('prog_header')
+        self.ps = self.g('prog_subhead')
+        self.pl = self.g('prog_line')
+        self.pb = self.g('progress')
         
         # Set up DND
         self.dndsetup()
@@ -80,10 +86,29 @@ class FontMonk:
         s = ""
         while iter:
             v = model.get_value(iter, 2)
-            s += 'Print("Opening %s");Open("%s");Print("Saving %s.ttf");Generate("%s.ttf");' % (v, v, v, v) 
+            s += 'Print("Opening %s");Open("%s");Print("Saving %s.otf");Generate("%s.otf");' % (v, v, v, v) 
             iter = model.iter_next(iter)
-        print s
-        os.system('fontforge -lang=ff -c \'%s\'' % s)
+        self.runscript(s)        
+        
+    def runscript(self, s):
+        p = subprocess.Popen('fontforge -lang=ff -c \'%s\' &' % s, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        stdout_id = gobject.io_add_watch(p.stdout, gobject.IO_IN, self.gotline)
+        hup_id = gobject.io_add_watch(p.stdout, gobject.IO_HUP, self.hup)
+        
+    def gotline(self, file, dunno):
+        newdata = file.read().split('\n')
+        if (newdata[-2]):
+            self.pl.set_text(str(newdata[-2]))
+        if (newdata[-1]):
+            self.pl.set_text(str(newdata[-1]))
+        self.pb.pulse()
+        return False
+    
+    def hup(self, file, dunno):
+        self.pl.hide()
+        self.ps.set_text("FontMonk has finished converting your fonts.")
+        self.pb.set_fraction(1)
+        return False
         
     # Callback handlers 
     
@@ -112,7 +137,7 @@ class FontMonk:
         self.pw.show_all()
         self.makescript()
     
-    def cancelbutton_clicked_cb(self, widget):
+    def closebutton_clicked_cb(self, widget):
         self.pw.hide()
         self.w.show()
     
