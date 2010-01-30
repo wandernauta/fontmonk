@@ -70,6 +70,14 @@ class FontMonk:
     
     def quit(self, widget):
         gtk.main_quit()
+    
+    def del_button_clicked_cb(self, widget):
+        sel = self.treeview.get_selection()
+        selection = self.treeview.get_selection()
+        model, selected = selection.get_selected_rows()
+        iters = [model.get_iter(path) for path in selected]
+        for iter in iters:
+            model.remove(iter)
         
     def drag_data_received_data(self, treeview, context, x, y, selection,
                                 info, etime):
